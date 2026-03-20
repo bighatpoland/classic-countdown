@@ -10,27 +10,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        shell: {
-          bg: "#fff6ed",
-          ink: "#24313c",
-          mute: "#5f6f7c",
-          line: "#dfd2c3",
-          soft: "#f9ede0"
-        },
-        accent: {
-          50: "#fff0dd",
-          100: "#ffe2bf",
-          300: "#f7b77b",
-          400: "#ef9d58",
-          500: "#dc7c38",
-          800: "#8d4b18"
+        applus: {
+          blue: "#0a70eb",
+          text: "#3a414a",
+          border: "#8a96a3",
+          panel: "#ffffff",
+          muted: "#eef2f7",
+          accent: "#f3c340"
         }
       },
-      fontFamily: {
-        "serif-display": ['"Iowan Old Style"', '"Palatino Linotype"', '"Book Antiqua"', "Palatino", "serif"]
-      },
       boxShadow: {
-        panel: "0 20px 45px rgba(70, 43, 19, 0.10)"
+        panel: "0 4px 18px rgba(0, 0, 0, 0.08)"
       }
     }
   },
@@ -38,3 +28,4 @@ const config: Config = {
 };
 
 export default config;
+
