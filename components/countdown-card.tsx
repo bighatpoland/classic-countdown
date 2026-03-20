@@ -79,6 +79,15 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
     { id: "004", name: "Work days", type: "Schedule", value: schedule.workDays.map(weekdayLabel).join(", "), meta: `${schedule.startTime}-${schedule.endTime}` },
     { id: "005", name: "Target point", type: "Deadline", value: formatTarget(state.targetIso), meta: "Auto refresh" }
   ];
+  const checkboxRows: Array<{ label: string; checked: boolean }> = [
+    { label: "Konfiguriert", checked: true },
+    { label: "keine Artikelstat.", checked: state.mode === "after_work" },
+    { label: "keine Intrastat.", checked: state.mode === "weekend" },
+    { label: "durchdisponiert", checked: state.mode === "in_work" },
+    { label: "zu verpacken", checked: false },
+    { label: "unvollstandig", checked: false },
+    { label: "keine Anzahlung", checked: false }
+  ];
 
   return (
     <div className="space-y-4">
@@ -141,15 +150,7 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
           </div>
 
           <div className="grid content-start gap-3 text-[12px] text-[#3a414a]">
-            {[
-              ["Konfiguriert", true],
-              ["keine Artikelstat.", state.mode === "after_work"],
-              ["keine Intrastat.", state.mode === "weekend"],
-              ["durchdisponiert", state.mode === "in_work"],
-              ["zu verpacken", false],
-              ["unvollstandig", false],
-              ["keine Anzahlung", false]
-            ].map(([label, checked]) => (
+            {checkboxRows.map(({ label, checked }) => (
               <div className="flex items-center justify-between gap-4" key={label}>
                 <span>{label}</span>
                 <span
