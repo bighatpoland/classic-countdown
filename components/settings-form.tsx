@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { FormEvent } from "react";
+import type { ReactNode } from "react";
 import { useState } from "react";
 
 import { DAY_LABELS } from "@/lib/defaults";
@@ -13,6 +14,27 @@ type SettingsFormProps = {
   schedule: WorkSchedule;
   onSave: (schedule: WorkSchedule) => void;
 };
+
+function ClassicFieldRow({
+  label,
+  children,
+  compact = false
+}: {
+  label: string;
+  children: ReactNode;
+  compact?: boolean;
+}) {
+  return (
+    <div className={["flex items-center gap-3", compact ? "min-h-[24px]" : "min-h-[30px]"].join(" ")}>
+      <div className="w-[126px] shrink-0 text-[12px] text-[#3a414a]">{label}</div>
+      <div className="min-w-0 flex-1">{children}</div>
+    </div>
+  );
+}
+
+function ClassicCard({ children }: { children: ReactNode }) {
+  return <section className="rounded-[6px] border border-[#d5dbe3] bg-white p-3 shadow-[0_1px_1px_rgba(0,0,0,0.1),0_5px_14px_rgba(0,0,0,0.06)]">{children}</section>;
+}
 
 export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
   const router = useRouter();
@@ -59,69 +81,185 @@ export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
   }
 
   return (
-    <form className="rounded border border-applus-border bg-white p-4 shadow-panel" onSubmit={handleSave}>
-      <h1 className="text-lg font-semibold text-applus-text">Schedule settings</h1>
-      <p className="mt-1 text-sm text-slate-600">Configure your workday to drive countdown calculation.</p>
+    <form className="space-y-4" onSubmit={handleSave}>
+      <div className="grid gap-4 xl:grid-cols-3">
+        <ClassicCard>
+          <div className="space-y-2">
+            <ClassicFieldRow label="Artikel Nr.: *" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-[rgba(255,255,255,0.8)] px-[6px] text-[12px] text-[#6f747e]">CC-Workday-001</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Benennung" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Classic Countdown Settings</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Zeichnung Nr.:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Arbeitszeitmodell</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Artikelgruppe:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Mon-Fri</div>
+            </ClassicFieldRow>
+          </div>
+        </ClassicCard>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        <label className="grid gap-1 text-sm font-medium text-applus-text">
-          Start time
-          <input
-            className="h-10 rounded border border-applus-border px-3 text-sm outline-none focus:border-applus-blue focus:ring-2 focus:ring-blue-200"
-            onChange={(event) => setStartTime(event.target.value)}
-            required
-            type="time"
-            value={startTime}
-          />
-        </label>
+        <ClassicCard>
+          <div className="space-y-2">
+            <ClassicFieldRow label="Status:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-[rgba(255,255,255,0.8)] px-[6px] text-[12px] text-[#6f747e]">3 freigegeben</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="ME:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Stuck</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Attributklasse:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Workday schedule</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Gewicht/manuell:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">{startTime}</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Abmessung:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">{endTime}</div>
+            </ClassicFieldRow>
+          </div>
+        </ClassicCard>
 
-        <label className="grid gap-1 text-sm font-medium text-applus-text">
-          End time
-          <input
-            className="h-10 rounded border border-applus-border px-3 text-sm outline-none focus:border-applus-blue focus:ring-2 focus:ring-blue-200"
-            onChange={(event) => setEndTime(event.target.value)}
-            required
-            type="time"
-            value={endTime}
-          />
-        </label>
+        <ClassicCard>
+          <div className="space-y-2">
+            <ClassicFieldRow label="Status:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-[rgba(255,255,255,0.8)] px-[6px] text-[12px] text-[#6f747e]">Arbeitswoche</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="ME:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Stuck</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Attributklasse:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">{workDays.map((day) => DAY_LABELS.find((entry) => entry.value === day)?.label ?? "").join(", ")}</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Gewicht/manuell:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Desktop first</div>
+            </ClassicFieldRow>
+            <ClassicFieldRow label="Abmessung:" compact>
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">{`${startTime} - ${endTime}`}</div>
+            </ClassicFieldRow>
+          </div>
+        </ClassicCard>
       </div>
 
-      <fieldset className="mt-4">
-        <legend className="mb-2 text-sm font-medium text-applus-text">Working days</legend>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
-          {DAY_LABELS.map((day) => {
-            const selected = workDays.includes(day.value);
-            return (
-              <label
-                className={[
-                  "flex cursor-pointer items-center justify-center rounded border px-3 py-2 text-sm",
-                  selected ? "border-applus-blue bg-blue-50 font-medium text-applus-text" : "border-applus-border text-applus-text hover:bg-slate-100"
-                ].join(" ")}
-                key={day.value}
-              >
-                <input checked={selected} className="sr-only" onChange={() => toggleDay(day.value)} type="checkbox" />
-                {day.label}
-              </label>
-            );
-          })}
+      <ClassicCard>
+        <div className="flex items-center justify-between border-b border-[#d7dce2] bg-[rgba(154,167,180,0.25)] px-2 py-1 text-[12px] text-[#3a414a]">
+          <div className="flex flex-wrap gap-5">
+            <span>Lorem Ipsum</span>
+            <span>Lorem Ipsum</span>
+            <span>Lorem Ipsum</span>
+            <span>Lorem Ipsum</span>
+            <span>Comments</span>
+            <span>Actions</span>
+            <span>Lorem Ipsum</span>
+            <span>Lorem Ipsum</span>
+          </div>
+          <span className="text-[11px]">v</span>
         </div>
-      </fieldset>
 
-      {error && (
-        <p className="mt-3 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
-          {error}
-        </p>
-      )}
+        <div className="grid gap-6 px-3 py-4 xl:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="space-y-3">
+            <ClassicFieldRow label="Warengruppe:">
+              <div className="grid grid-cols-[126px_minmax(0,1fr)] gap-2">
+                <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-[rgba(255,255,255,0.8)] px-[6px] text-[12px] text-[#6f747e]">3 freigegeben</div>
+                <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Countdown</div>
+              </div>
+            </ClassicFieldRow>
 
-      <div className="mt-5 flex flex-wrap gap-3">
-        <button className="h-10 rounded bg-applus-blue px-4 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-applus-blue" type="submit">
-          Save and return
-        </button>
-        <Link className="inline-flex h-10 items-center rounded border border-applus-border px-4 text-sm font-medium text-applus-text hover:bg-slate-100" href="/">
-          Cancel
-        </Link>
-      </div>
+            <ClassicFieldRow label="Konfigurator:">
+              <input
+                className="h-[24px] w-full rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a] outline-none focus:border-[#0a70eb]"
+                onChange={(event) => setStartTime(event.target.value)}
+                type="time"
+                value={startTime}
+              />
+            </ClassicFieldRow>
+
+            <ClassicFieldRow label="Konfigurationsart:">
+              <input
+                className="h-[24px] w-full rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a] outline-none focus:border-[#0a70eb]"
+                onChange={(event) => setEndTime(event.target.value)}
+                type="time"
+                value={endTime}
+              />
+            </ClassicFieldRow>
+
+            <ClassicFieldRow label="Kostenstelle">
+              <div className="grid grid-cols-2 gap-2">
+                {DAY_LABELS.map((day) => {
+                  const selected = workDays.includes(day.value);
+                  return (
+                    <label
+                      className={[
+                        "flex h-[24px] cursor-pointer items-center justify-center rounded-[4px] border px-[6px] text-[12px]",
+                        selected ? "border-[#0a70eb] bg-[rgba(10,112,235,0.1)] font-medium text-[#3a414a]" : "border-[#8a96a3] bg-white text-[#3a414a]"
+                      ].join(" ")}
+                      key={day.value}
+                    >
+                      <input checked={selected} className="sr-only" onChange={() => toggleDay(day.value)} type="checkbox" />
+                      {day.label}
+                    </label>
+                  );
+                })}
+              </div>
+            </ClassicFieldRow>
+
+            <ClassicFieldRow label="Zolltarif-Nr.:">
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">{workDays.length} active days</div>
+            </ClassicFieldRow>
+
+            <ClassicFieldRow label="Vorganger-Artikel:">
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Start {startTime}</div>
+            </ClassicFieldRow>
+
+            <ClassicFieldRow label="Nachfolger-Artikel:">
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Ende {endTime}</div>
+            </ClassicFieldRow>
+
+            <ClassicFieldRow label="Alternativ-Artikel:">
+              <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] text-[#3a414a]">Browser local storage</div>
+            </ClassicFieldRow>
+          </div>
+
+          <div className="grid content-start gap-3 text-[12px] text-[#3a414a]">
+            {[
+              ["Konfiguriert", true],
+              ["keine Artikelstat.", false],
+              ["keine Intrastat.", false],
+              ["durchdisponiert", true],
+              ["zu verpacken", false],
+              ["unvollstandig", false],
+              ["keine Anzahlung", false]
+            ].map(([label, checked]) => (
+              <div className="flex items-center justify-between gap-4" key={label}>
+                <span>{label}</span>
+                <span
+                  className={[
+                    "flex h-[15px] w-[15px] items-center justify-center rounded-[4px] border border-[#8a96a3] bg-white text-[10px]",
+                    checked ? "text-[#0a70eb]" : "text-transparent"
+                  ].join(" ")}
+                >
+                  x
+                </span>
+              </div>
+            ))}
+
+            {error ? (
+              <p className="rounded-[4px] border border-[#d47777] bg-[#fff0f0] px-3 py-2 text-[12px] text-[#9c2f2f]" role="alert">
+                {error}
+              </p>
+            ) : null}
+
+            <div className="flex flex-wrap gap-2 pt-3">
+              <button className="inline-flex h-[28px] items-center rounded-[4px] border border-[#0a70eb] bg-[#0a70eb] px-3 text-[12px] font-medium text-white" type="submit">
+                Speichern
+              </button>
+              <Link className="inline-flex h-[28px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-3 text-[12px] font-medium text-[#3a414a]" href="/">
+                Abbrechen
+              </Link>
+            </div>
+          </div>
+        </div>
+      </ClassicCard>
     </form>
   );
 }

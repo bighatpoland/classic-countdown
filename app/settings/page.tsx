@@ -8,7 +8,7 @@ export default function SettingsPage() {
   const { loaded, schedule, updateSchedule } = useWorkSchedule();
 
   return (
-    <ApplusShell activeRoute="/settings" title="Record Document">
+    <ApplusShell activeRoute="/settings" title="Sub page 2">
       {!loaded ? (
         <div className="rounded border border-applus-border bg-white p-4 text-sm text-slate-600">Loading settings...</div>
       ) : (
@@ -17,4 +17,3 @@ export default function SettingsPage() {
     </ApplusShell>
   );
 }
-

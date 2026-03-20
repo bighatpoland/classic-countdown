@@ -7,6 +7,7 @@
   --applus-text: #3a414a;
   --applus-border: #8a96a3;
   --applus-surface: #f4f7fb;
+  --applus-accent: #f3c340;
 }
 
 * {
@@ -20,7 +21,11 @@ body {
   min-height: 100%;
   font-family: Rubik, "Segoe UI", Tahoma, sans-serif;
   color: var(--applus-text);
-  background: var(--applus-surface);
+  background:
+    linear-gradient(180deg, rgba(251, 218, 97, 0.05) 0%, rgba(255, 255, 255, 0.96) 22%, #ffffff 100%),
+    linear-gradient(90deg, rgba(10, 112, 235, 0.05) 0%, rgba(10, 112, 235, 0.05) 100%);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -38,4 +43,3 @@ a {
     scroll-behavior: auto !important;
   }
 }
-
