@@ -1,24 +1,28 @@
-# Classic Countdown
+# Classic SRS Speaking
 
-Desktop-first countdown app inspired by APplus Classic. It calculates time remaining to the end of the workday and supports local schedule settings.
+Mobile-first PWA do codziennej nauki hiszpanskiego z naciskiem na mowienie, limitowany SRS i lokalny workflow bez logowania.
 
-## Features
+## MVP features
 
-- Desktop-first APplus-like shell (`top bar + left nav + center + right panel`)
-- Countdown states:
-  - `before_work`
-  - `in_work`
-  - `after_work`
-  - `weekend`
-- Configurable local schedule (`startTime`, `endTime`, `workDays`)
-- Local persistence via `localStorage`
-- Unit, integration, and E2E test scaffolding
+- `Today` z planem dnia `20 min` oraz fallbackiem `5+5+5`
+- `SRS` produkcyjne `PL -> ES` z prostym `SM-2`
+- `Inbox` i pipeline `Capture -> Card -> Spoken`
+- `Input` z krotkimi materialami i szybkim przechwytywaniem fraz
+- `Speak` z lokalnym nagraniem audio, odsluchem i self-checkiem
+- `Tutor` z prepem, notatkami po lekcji i transferem do SRS
+- `Progress` z tygodniowym trackingiem i snapshotami `1/7/14`
+- `PWA + offline`
+- local-first persystencja przez `IndexedDB` via `Dexie`
+- opcjonalne endpointy AI:
+  - `POST /api/ai/prompt`
+  - `POST /api/ai/feedback`
 
 ## Tech stack
 
 - Next.js (App Router)
 - TypeScript
 - Tailwind CSS
+- Dexie
 - Vitest
 - Playwright
 
@@ -51,7 +55,7 @@ npm run test:e2e
 ## Deploy (Vercel via GitHub)
 
 1. Push repository to `main`.
-2. Import `bighatpoland/classic-countdown` in Vercel.
+2. Import the repository in Vercel as a Next.js project.
 3. Keep default Next.js build settings.
 4. Enable preview deployments for feature branches.
-
+5. If you want optional AI, add `OPENAI_API_KEY` and optionally `OPENAI_MODEL`.

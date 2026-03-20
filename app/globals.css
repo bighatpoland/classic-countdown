@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --applus-blue: #0a70eb;
-  --applus-text: #3a414a;
-  --applus-border: #8a96a3;
-  --applus-surface: #f4f7fb;
+  --shell-bg: #fff6ed;
+  --shell-ink: #24313c;
+  --shell-mute: #5f6f7c;
+  --shell-line: #dfd2c3;
+  --shell-soft: #f9ede0;
+  --accent-50: #fff0dd;
 }
 
 * {
@@ -18,14 +20,23 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  font-family: Rubik, "Segoe UI", Tahoma, sans-serif;
-  color: var(--applus-text);
-  background: var(--applus-surface);
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--shell-ink);
+  background:
+    radial-gradient(circle at top left, rgba(255, 221, 189, 0.7), transparent 35%),
+    linear-gradient(180deg, #fff7ee 0%, #fff1e4 100%);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,4 +49,3 @@ a {
     scroll-behavior: auto !important;
   }
 }
-

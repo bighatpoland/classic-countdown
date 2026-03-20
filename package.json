@@ -1,5 +1,5 @@
 {
-  "name": "classic-countdown",
+  "name": "classic-srs-speaking",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -15,6 +15,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "dexie": "^4.3.0",
     "next": "15.2.2",
     "react": "19.0.0",
     "react-dom": "19.0.0"
@@ -34,4 +35,3 @@
     "vitest": "3.1.1"
   }
 }
-
