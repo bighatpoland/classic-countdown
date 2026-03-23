@@ -62,8 +62,8 @@ const toolbarIcons = ["first", "prev", "counter", "next", "last", "search", "cle
 
 function LogoMark() {
   return (
-    <div className="flex h-[62px] w-[84px] items-center justify-center rounded-br-[24px] bg-[#f3c340] shadow-[6px_0_18px_rgba(0,0,0,0.12)]">
-      <div className="translate-y-[-1px] text-[25px] font-medium tracking-[-0.05em] text-white">ap+</div>
+    <div className="flex h-[60px] w-[84px] items-center justify-center rounded-br-[26px] bg-[linear-gradient(180deg,#f8cd53_0%,#f0bd2f_100%)] shadow-[8px_0_18px_rgba(0,0,0,0.14)]">
+      <div className="translate-y-[-1px] text-[25px] font-medium tracking-[-0.07em] text-white">ap+</div>
     </div>
   );
 }
@@ -205,8 +205,8 @@ function LeftNavigation({ activeRoute }: { activeRoute: ShellRoute }) {
   const isCountdownRoute = activeRoute === "/" || activeRoute === "/today";
 
   return (
-    <aside className="flex h-full flex-col border-r border-[#d7dce2] bg-white">
-      <div className="border-b border-[#e0e2e7] px-2 py-[10px]">
+    <aside className="flex h-full flex-col border-r border-[#d7dce2] bg-white shadow-[inset_-1px_0_0_rgba(215,220,226,0.95)]">
+      <div className="border-b border-[#e0e2e7] px-2 py-[9px]">
         <div className="flex items-center gap-2 text-[13px] font-medium text-[#3a414a]">
           <div className="flex h-[22px] w-[22px] items-center justify-center rounded-[5px] bg-[#0a70eb] text-[10px] font-bold text-white">S</div>
           <span>Sales</span>
@@ -229,7 +229,9 @@ function LeftNavigation({ activeRoute }: { activeRoute: ShellRoute }) {
               <span
                 className={[
                   "flex items-center gap-2 rounded-[4px] px-[10px] py-[6px] text-[12px] leading-[1.25] text-[#3a414a] transition-colors",
-                  isActive ? "border border-[#0a70eb] bg-[rgba(10,112,235,0.06)] font-medium" : "hover:bg-[#f4f7fb]"
+                  isActive
+                    ? "border border-[#0a70eb] bg-[linear-gradient(180deg,rgba(223,237,255,0.88)_0%,rgba(243,248,255,0.92)_100%)] font-medium shadow-[inset_2px_0_0_#0a70eb]"
+                    : "hover:bg-[#f4f7fb]"
                 ].join(" ")}
               >
                 <NavGlyph />
@@ -247,7 +249,9 @@ function LeftNavigation({ activeRoute }: { activeRoute: ShellRoute }) {
                       <span
                         className={[
                           "flex items-center gap-2 rounded-[4px] px-[10px] py-[6px] text-[12px] text-[#3a414a]",
-                          index === 2 ? "border border-[#0a70eb] bg-[rgba(10,112,235,0.06)] font-medium" : "hover:bg-[#f4f7fb]"
+                          index === 2
+                            ? "border border-[#0a70eb] bg-[linear-gradient(180deg,rgba(223,237,255,0.88)_0%,rgba(243,248,255,0.92)_100%)] font-medium shadow-[inset_2px_0_0_#0a70eb]"
+                            : "hover:bg-[#f4f7fb]"
                         ].join(" ")}
                         key={`${subItem}-${index}`}
                       >
@@ -270,7 +274,7 @@ function RightFunctionsPanel({ activeRoute }: { activeRoute: ShellRoute }) {
   const isCountdownRoute = activeRoute === "/" || activeRoute === "/today";
 
   return (
-    <aside className="flex h-full flex-col border-l border-[#d7dce2] bg-white">
+    <aside className="flex h-full flex-col border-l border-[#d7dce2] bg-white shadow-[inset_1px_0_0_rgba(215,220,226,0.95)]">
       <div className="flex h-[42px] items-center justify-between border-b border-[#e0e2e7] px-4">
         <div className="flex items-center gap-3">
           <span className="text-[16px] text-[#6f747e]">&gt;</span>
@@ -289,7 +293,9 @@ function RightFunctionsPanel({ activeRoute }: { activeRoute: ShellRoute }) {
                 <span
                   className={[
                     "flex items-center gap-2 rounded-[4px] px-[10px] py-[6px] text-[12px] text-[#3a414a]",
-                    isSelected ? "border-l-2 border-[#0a70eb] bg-[rgba(10,112,235,0.08)] font-medium" : "hover:bg-[#f4f7fb]"
+                    isSelected
+                      ? "border-l-2 border-[#0a70eb] bg-[linear-gradient(180deg,rgba(223,237,255,0.9)_0%,rgba(243,248,255,0.94)_100%)] font-medium"
+                      : "hover:bg-[#f4f7fb]"
                   ].join(" ")}
                 >
                   {item === "Item Text" ? <NavGlyph /> : null}
@@ -319,7 +325,7 @@ function RightFunctionsPanel({ activeRoute }: { activeRoute: ShellRoute }) {
 function ToolbarButton({ kind, highlighted = false }: { kind: string; highlighted?: boolean }) {
   if (kind === "counter") {
     return (
-      <button className="flex h-[24px] min-w-[72px] items-center justify-center rounded-[12px] bg-[#0a70eb] px-[10px] text-[11px] font-medium text-white" type="button">
+      <button className="flex h-[24px] min-w-[72px] items-center justify-center rounded-[12px] bg-[#0a70eb] px-[10px] text-[11px] font-medium text-white shadow-[0_1px_4px_rgba(10,112,235,0.26)]" type="button">
         12 / 200
       </button>
     );
@@ -340,10 +346,10 @@ function ToolbarButton({ kind, highlighted = false }: { kind: string; highlighte
 
 function WorkflowRibbon() {
   return (
-    <div className="rounded-t-[4px] bg-[linear-gradient(180deg,rgba(10,112,235,0.22)_0%,rgba(10,112,235,0.05)_100%)] px-[16px] pb-[10px] pt-[8px] shadow-[0_0_9px_rgba(0,0,0,0.08)]">
+    <div className="rounded-t-[4px] bg-[linear-gradient(180deg,rgba(10,112,235,0.24)_0%,rgba(10,112,235,0.08)_100%)] px-[16px] pb-[10px] pt-[8px] shadow-[0_0_10px_rgba(0,0,0,0.08)]">
       <div className="grid grid-cols-9 gap-4 text-[10px] font-medium leading-[1.25] text-[#3a414a]">
         {workflowSteps.map((step) => (
-          <div className="text-center" key={step}>
+          <div className="text-left" key={step}>
             {step}
           </div>
         ))}
@@ -365,11 +371,11 @@ export function ApplusShell({ title, activeRoute, children }: ShellProps) {
   const [rightOpen, setRightOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,rgba(251,218,97,0.03)_0%,rgba(255,255,255,0.9)_18%,rgba(10,112,235,0.03)_100%)] text-[#3a414a]">
-      <header className="relative z-30 bg-white shadow-[0_0_9px_rgba(0,0,0,0.08)]">
-        <div className="h-[8px] w-full bg-[#0a70eb]" />
+    <div className="min-h-screen bg-[radial-gradient(circle_at_bottom,rgba(244,207,95,0.18)_0%,rgba(255,255,255,0)_24%),linear-gradient(180deg,rgba(10,112,235,0.10)_0%,rgba(255,255,255,0.94)_14%,rgba(255,255,255,1)_100%)] text-[#3a414a]">
+      <header className="relative z-30 bg-white shadow-[0_0_10px_rgba(0,0,0,0.08)]">
+        <div className="h-[6px] w-full bg-[#0a70eb]" />
 
-        <div className="grid min-h-[101px] grid-cols-[84px_minmax(0,1fr)]">
+        <div className="grid min-h-[96px] grid-cols-[84px_minmax(0,1fr)]">
           <div className="row-span-2">
             <LogoMark />
           </div>
@@ -414,7 +420,7 @@ export function ApplusShell({ title, activeRoute, children }: ShellProps) {
             </div>
           </div>
 
-          <div className="flex min-h-[39px] flex-wrap items-center gap-3 px-5 py-[7px]">
+          <div className="flex min-h-[36px] flex-wrap items-center gap-3 px-5 py-[5px]">
             <div className="flex flex-wrap items-center gap-[6px]">
               {toolbarIcons.map((kind) => (
                 <ToolbarButton highlighted={kind === "counter"} key={kind} kind={kind} />
@@ -435,12 +441,12 @@ export function ApplusShell({ title, activeRoute, children }: ShellProps) {
         </div>
       </header>
 
-      <div className="grid min-h-[calc(100vh-101px)] grid-cols-1 xl:grid-cols-[200px_minmax(0,1fr)_208px]">
+      <div className="grid min-h-[calc(100vh-96px)] grid-cols-1 xl:grid-cols-[200px_minmax(0,1fr)_208px]">
         <div className="hidden xl:block">
           <LeftNavigation activeRoute={activeRoute} />
         </div>
 
-        <main className="overflow-x-auto bg-[linear-gradient(180deg,rgba(10,112,235,0.12)_0%,rgba(255,255,255,0.92)_18%,rgba(255,255,255,1)_100%)]">
+        <main className="overflow-x-auto bg-[linear-gradient(180deg,rgba(10,112,235,0.13)_0%,rgba(255,255,255,0.94)_16%,rgba(255,255,255,1)_100%)]">
           <WorkflowRibbon />
           <div className="px-[14px] pb-[16px] pt-[8px]">{children}</div>
         </main>

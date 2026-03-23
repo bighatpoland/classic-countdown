@@ -57,7 +57,7 @@ function ClassicField({ label, value, subtle = false }: { label: string; value: 
       <div className="w-[126px] shrink-0 text-[12px] leading-[1.25] text-[#3a414a]">{label}</div>
       <div
         className={[
-          "flex h-[24px] min-w-0 flex-1 items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] tracking-[0.01em]",
+          "flex h-[23px] min-w-0 flex-1 items-center rounded-[3px] border border-[#95a1ac] bg-white px-[6px] text-[12px] tracking-[0.01em]",
           subtle ? "bg-[rgba(255,255,255,0.7)] text-[#b6bcc4]" : "text-[#3a414a]"
         ].join(" ")}
       >
@@ -68,7 +68,53 @@ function ClassicField({ label, value, subtle = false }: { label: string; value: 
 }
 
 function ClassicCard({ children }: { children: ReactNode }) {
-  return <section className="rounded-[6px] border border-[#dbe0e6] bg-white p-[12px] shadow-[0_1px_1px_rgba(0,0,0,0.10),0_2px_3px_rgba(0,0,0,0.08),0_9px_10px_rgba(0,0,0,0.03)]">{children}</section>;
+  return <section className="rounded-[5px] border border-[#dbe0e6] bg-white p-[12px] shadow-[0_1px_1px_rgba(0,0,0,0.08),0_2px_4px_rgba(0,0,0,0.06),0_10px_14px_rgba(10,112,235,0.05)]">{children}</section>;
+}
+
+function ClassicCheckbox({ checked = false }: { checked?: boolean }) {
+  return (
+    <span
+      className={[
+        "flex h-[15px] w-[15px] items-center justify-center rounded-[4px] border border-[#8a96a3] bg-white text-[10px] leading-none",
+        checked ? "text-[#0a70eb]" : "text-transparent"
+      ].join(" ")}
+    >
+      x
+    </span>
+  );
+}
+
+function ChevronCell() {
+  return <span className="text-[14px] text-[#6f747e]">&gt;</span>;
+}
+
+function FieldWithAction({
+  label,
+  value,
+  action = "[]",
+  subtle = false
+}: {
+  label: string;
+  value: string;
+  action?: string;
+  subtle?: boolean;
+}) {
+  return (
+    <div className="flex min-h-[24px] items-center gap-[8px]">
+      <div className="w-[126px] shrink-0 text-[12px] leading-[1.25] text-[#3a414a]">{label}</div>
+      <div className="flex min-w-0 flex-1 items-center gap-[0]">
+        <div
+          className={[
+            "flex h-[23px] min-w-0 flex-1 items-center rounded-l-[3px] border border-r-0 border-[#95a1ac] bg-white px-[6px] text-[12px] tracking-[0.01em]",
+            subtle ? "bg-[rgba(255,255,255,0.7)] text-[#b6bcc4]" : "text-[#3a414a]"
+          ].join(" ")}
+        >
+          <span className="truncate">{value}</span>
+        </div>
+        <span className="flex h-[23px] w-[24px] items-center justify-center border border-[#95a1ac] bg-[#f7f9fb] text-[10px] text-[#6f747e]">{action}</span>
+      </div>
+    </div>
+  );
 }
 
 export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
@@ -94,10 +140,10 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
       <div className="grid gap-[14px] xl:grid-cols-[1.08fr_1.04fr_1.04fr]">
         <ClassicCard>
           <div className="space-y-2">
-            <ClassicField label="Artikel Nr.: *" subtle value="CC-Workday-001" />
-            <ClassicField label="Benennung" value="Classic Countdown Dashboard" />
-            <ClassicField label="Zeichnung Nr.:" value={now.toLocaleDateString("en-GB")} />
-            <ClassicField label="Artikelgruppe:" value={modeLabel(state.mode)} />
+            <ClassicField label="Artikel Nr.: *" subtle value="IT-Test-3" />
+            <ClassicField label="Benennung" value={`IT-Artikel Test - ${formatRemainingTime(state.remainingMs)}`} />
+            <ClassicField label="Zeichnung Nr.:" value={`CC-${now.toLocaleDateString("en-GB")}`} />
+            <ClassicField label="Artikelgruppe:" value={`Internal Countdown / ${modeLabel(state.mode)}`} />
           </div>
         </ClassicCard>
 
@@ -105,8 +151,8 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
           <div className="space-y-2">
             <ClassicField label="Status:" subtle value="3 freigegeben" />
             <ClassicField label="ME:" value="Stuck" />
-            <ClassicField label="Attributklasse:" value="Workday timer" />
-            <ClassicField label="Gewicht/manuell:" value={formatRemainingTime(state.remainingMs)} />
+            <FieldWithAction label="Attributklasse:" value="Internal Countdown" />
+            <FieldWithAction label="Gewicht/manuell:" action="v" value={formatRemainingTime(state.remainingMs)} />
             <ClassicField label="Abmessung:" value={formatTarget(state.targetIso)} />
           </div>
         </ClassicCard>
@@ -114,16 +160,16 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
         <ClassicCard>
           <div className="space-y-2">
             <ClassicField label="Status:" subtle value={modeLabel(state.mode)} />
-            <ClassicField label="ME:" value="Stuck" />
-            <ClassicField label="Attributklasse:" value={schedule.workDays.map(weekdayLabel).join(", ")} />
-            <ClassicField label="Gewicht/manuell:" value={now.toLocaleString("en-GB", { hour12: false })} />
+            <FieldWithAction label="ME:" action="v" value="Stuck" />
+            <FieldWithAction label="Attributklasse:" value={schedule.workDays.map(weekdayLabel).join(", ")} />
+            <FieldWithAction label="Gewicht/manuell:" action="v" value={now.toLocaleString("en-GB", { hour12: false })} />
             <ClassicField label="Abmessung:" value={`${schedule.startTime} - ${schedule.endTime}`} />
           </div>
         </ClassicCard>
       </div>
 
       <ClassicCard>
-        <div className="flex items-center justify-between border-b border-[#d7dce2] bg-[rgba(154,167,180,0.25)] px-[8px] py-[4px] text-[12px] text-[#3a414a]">
+        <div className="flex items-center justify-between border-b border-[#d7dce2] bg-[linear-gradient(180deg,rgba(208,214,221,0.7)_0%,rgba(228,233,238,0.82)_100%)] px-[8px] py-[4px] text-[12px] text-[#3a414a]">
           <div className="flex flex-wrap gap-[16px]">
             <span>Lorem Ipsum</span>
             <span>Lorem Ipsum</span>
@@ -139,10 +185,20 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
 
         <div className="grid gap-[18px] px-[10px] py-[10px] xl:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-[8px]">
-            <ClassicField label="Warengruppe:" subtle value="3 freigegeben" />
-            <ClassicField label="Konfigurator:" value={formatRemainingTime(state.remainingMs)} />
-            <ClassicField label="Konfigurationsart:" value={modeLabel(state.mode)} />
-            <ClassicField label="Kostenstelle" value={now.toLocaleString("en-GB", { hour12: false })} />
+            <div className="flex min-h-[24px] items-center gap-[8px]">
+              <div className="w-[126px] shrink-0 text-[12px] leading-[1.25] text-[#3a414a]">Warengruppe:</div>
+              <div className="grid min-w-0 flex-1 grid-cols-[126px_minmax(0,1fr)_24px_24px] gap-0">
+                <div className="flex h-[23px] items-center rounded-l-[3px] border border-r-0 border-[#95a1ac] bg-[rgba(255,255,255,0.7)] px-[6px] text-[12px] text-[#b6bcc4]">
+                  3 freigegeben
+                </div>
+                <div className="flex h-[23px] items-center border border-r-0 border-[#95a1ac] bg-white px-[6px] text-[12px] text-[#3a414a]">Lorem Ipsum</div>
+                <span className="flex h-[23px] items-center justify-center border border-r-0 border-[#95a1ac] bg-[#f7f9fb] text-[10px] text-[#6f747e]">[]</span>
+                <span className="flex h-[23px] items-center justify-center rounded-r-[3px] border border-[#95a1ac] bg-[#f7f9fb] text-[11px] text-[#6f747e]">&gt;</span>
+              </div>
+            </div>
+            <FieldWithAction action="v" label="Konfigurator:" value={formatRemainingTime(state.remainingMs)} />
+            <FieldWithAction label="Konfigurationsart:" value={modeLabel(state.mode)} />
+            <FieldWithAction action="v" label="Kostenstelle" value={now.toLocaleString("en-GB", { hour12: false })} />
             <ClassicField label="Zolltarif-Nr.:" value={formatTarget(state.targetIso)} />
             <ClassicField label="Vorganger-Artikel:" value={`Start ${schedule.startTime}`} />
             <ClassicField label="Nachfolger-Artikel:" value={`Ende ${schedule.endTime}`} />
@@ -153,14 +209,7 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
             {checkboxRows.map(({ label, checked }) => (
               <div className="flex items-center justify-between gap-4" key={label}>
                 <span>{label}</span>
-                <span
-                  className={[
-                    "flex h-[15px] w-[15px] items-center justify-center rounded-[4px] border border-[#8a96a3] bg-white text-[10px]",
-                    checked ? "text-[#0a70eb]" : "text-transparent"
-                  ].join(" ")}
-                >
-                  x
-                </span>
+                <ClassicCheckbox checked={checked} />
               </div>
             ))}
 
@@ -178,9 +227,9 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
 
       <ClassicCard>
         <div className="overflow-hidden rounded-[4px] border border-[#d7dce2]">
-          <div className="grid grid-cols-[84px_minmax(240px,2fr)_140px_170px_170px_170px_170px_62px_52px] bg-[rgba(154,167,180,0.4)] text-[12px] font-medium text-[#3a414a]">
+          <div className="grid grid-cols-[84px_minmax(240px,2fr)_170px_164px_164px_164px_164px_62px_52px] bg-[linear-gradient(180deg,rgba(205,212,219,0.88)_0%,rgba(224,229,234,0.96)_100%)] text-[12px] font-medium text-[#3a414a]">
             {["ID", "Document Name", "Document Type", "Lorum Ipsum", "Lorum Ipsum", "Lorum Ipsum", "Lorum Ipsum", "Lorum...", "Che..."].map((header) => (
-              <div className="border-r border-white px-[8px] py-[6px]" key={header}>
+              <div className="border-r border-[rgba(255,255,255,0.72)] px-[8px] py-[6px]" key={header}>
                 {header}
               </div>
             ))}
@@ -189,8 +238,8 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
           {rows.map((row, index) => (
             <div
               className={[
-                "grid grid-cols-[84px_minmax(240px,2fr)_140px_170px_170px_170px_170px_62px_52px] text-[12px] text-[#3a414a]",
-                index % 2 === 1 ? "bg-[rgba(154,167,180,0.34)]" : "bg-white"
+                "grid grid-cols-[84px_minmax(240px,2fr)_170px_164px_164px_164px_164px_62px_52px] text-[12px] text-[#3a414a]",
+                index % 2 === 1 ? "bg-[rgba(205,212,219,0.5)]" : "bg-white"
               ].join(" ")}
               key={row.id}
             >
@@ -201,8 +250,12 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
               <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{row.meta}</div>
               <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{schedule.startTime}</div>
               <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{schedule.endTime}</div>
-              <div className="border-r border-[#8a96a3] px-[8px] py-[5px] text-center">&gt;</div>
-              <div className="px-[8px] py-[5px] text-center">o</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px] text-center">
+                <ChevronCell />
+              </div>
+              <div className="flex items-center justify-center px-[8px] py-[5px]">
+                <ClassicCheckbox checked={index === 1 || index === 4} />
+              </div>
             </div>
           ))}
         </div>
