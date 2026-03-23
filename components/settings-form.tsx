@@ -25,7 +25,7 @@ function ClassicFieldRow({
   compact?: boolean;
 }) {
   return (
-    <div className={["flex items-center gap-3", compact ? "min-h-[24px]" : "min-h-[30px]"].join(" ")}>
+    <div className={["flex items-center gap-[8px]", compact ? "min-h-[24px]" : "min-h-[28px]"].join(" ")}>
       <div className="w-[126px] shrink-0 text-[12px] text-[#3a414a]">{label}</div>
       <div className="min-w-0 flex-1">{children}</div>
     </div>
@@ -33,7 +33,7 @@ function ClassicFieldRow({
 }
 
 function ClassicCard({ children }: { children: ReactNode }) {
-  return <section className="rounded-[6px] border border-[#d5dbe3] bg-white p-3 shadow-[0_1px_1px_rgba(0,0,0,0.1),0_5px_14px_rgba(0,0,0,0.06)]">{children}</section>;
+  return <section className="rounded-[6px] border border-[#dbe0e6] bg-white p-[12px] shadow-[0_1px_1px_rgba(0,0,0,0.10),0_2px_3px_rgba(0,0,0,0.08),0_9px_10px_rgba(0,0,0,0.03)]">{children}</section>;
 }
 
 export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
@@ -90,8 +90,8 @@ export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
   }
 
   return (
-    <form className="space-y-4" onSubmit={handleSave}>
-      <div className="grid gap-4 xl:grid-cols-3">
+    <form className="space-y-[14px]" onSubmit={handleSave}>
+      <div className="grid gap-[14px] xl:grid-cols-[1.08fr_1.04fr_1.04fr]">
         <ClassicCard>
           <div className="space-y-2">
             <ClassicFieldRow label="Artikel Nr.: *" compact>
@@ -151,8 +151,8 @@ export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
       </div>
 
       <ClassicCard>
-        <div className="flex items-center justify-between border-b border-[#d7dce2] bg-[rgba(154,167,180,0.25)] px-2 py-1 text-[12px] text-[#3a414a]">
-          <div className="flex flex-wrap gap-5">
+        <div className="flex items-center justify-between border-b border-[#d7dce2] bg-[rgba(154,167,180,0.25)] px-[8px] py-[4px] text-[12px] text-[#3a414a]">
+          <div className="flex flex-wrap gap-[16px]">
             <span>Lorem Ipsum</span>
             <span>Lorem Ipsum</span>
             <span>Lorem Ipsum</span>
@@ -165,8 +165,8 @@ export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
           <span className="text-[11px]">v</span>
         </div>
 
-        <div className="grid gap-6 px-3 py-4 xl:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="space-y-3">
+        <div className="grid gap-[18px] px-[10px] py-[10px] xl:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="space-y-[8px]">
             <ClassicFieldRow label="Warengruppe:">
               <div className="grid grid-cols-[126px_minmax(0,1fr)] gap-2">
                 <div className="flex h-[24px] items-center rounded-[4px] border border-[#8a96a3] bg-[rgba(255,255,255,0.8)] px-[6px] text-[12px] text-[#6f747e]">3 freigegeben</div>
@@ -229,7 +229,7 @@ export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
             </ClassicFieldRow>
           </div>
 
-          <div className="grid content-start gap-3 text-[12px] text-[#3a414a]">
+          <div className="grid content-start gap-[9px] text-[12px] text-[#3a414a]">
             {checkboxRows.map(({ label, checked }) => (
               <div className="flex items-center justify-between gap-4" key={label}>
                 <span>{label}</span>
@@ -250,7 +250,7 @@ export function SettingsForm({ schedule, onSave }: SettingsFormProps) {
               </p>
             ) : null}
 
-            <div className="flex flex-wrap gap-2 pt-3">
+            <div className="flex flex-wrap gap-2 pt-[6px]">
               <button className="inline-flex h-[28px] items-center rounded-[4px] border border-[#0a70eb] bg-[#0a70eb] px-3 text-[12px] font-medium text-white" type="submit">
                 Speichern
               </button>

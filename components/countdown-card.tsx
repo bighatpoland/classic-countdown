@@ -53,12 +53,12 @@ function formatShort(targetIso: string): string {
 
 function ClassicField({ label, value, subtle = false }: { label: string; value: string; subtle?: boolean }) {
   return (
-    <div className="flex min-h-[24px] items-center gap-3">
-      <div className="w-[126px] shrink-0 text-[12px] text-[#3a414a]">{label}</div>
+    <div className="flex min-h-[24px] items-center gap-[8px]">
+      <div className="w-[126px] shrink-0 text-[12px] leading-[1.25] text-[#3a414a]">{label}</div>
       <div
         className={[
-          "flex h-[24px] min-w-0 flex-1 items-center rounded-[4px] border border-[#8a96a3] px-[6px] text-[12px] tracking-[0.01em]",
-          subtle ? "bg-[rgba(255,255,255,0.6)] text-[#6f747e]" : "bg-[rgba(255,255,255,0.9)] text-[#3a414a]"
+          "flex h-[24px] min-w-0 flex-1 items-center rounded-[4px] border border-[#8a96a3] bg-white px-[6px] text-[12px] tracking-[0.01em]",
+          subtle ? "bg-[rgba(255,255,255,0.7)] text-[#b6bcc4]" : "text-[#3a414a]"
         ].join(" ")}
       >
         <span className="truncate">{value}</span>
@@ -68,7 +68,7 @@ function ClassicField({ label, value, subtle = false }: { label: string; value: 
 }
 
 function ClassicCard({ children }: { children: ReactNode }) {
-  return <section className="rounded-[6px] border border-[#d5dbe3] bg-white p-3 shadow-[0_1px_1px_rgba(0,0,0,0.1),0_5px_14px_rgba(0,0,0,0.06)]">{children}</section>;
+  return <section className="rounded-[6px] border border-[#dbe0e6] bg-white p-[12px] shadow-[0_1px_1px_rgba(0,0,0,0.10),0_2px_3px_rgba(0,0,0,0.08),0_9px_10px_rgba(0,0,0,0.03)]">{children}</section>;
 }
 
 export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
@@ -90,8 +90,8 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
   ];
 
   return (
-    <div className="space-y-4">
-      <div className="grid gap-4 xl:grid-cols-3">
+    <div className="space-y-[14px]">
+      <div className="grid gap-[14px] xl:grid-cols-[1.08fr_1.04fr_1.04fr]">
         <ClassicCard>
           <div className="space-y-2">
             <ClassicField label="Artikel Nr.: *" subtle value="CC-Workday-001" />
@@ -123,8 +123,8 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
       </div>
 
       <ClassicCard>
-        <div className="flex items-center justify-between border-b border-[#d7dce2] bg-[rgba(154,167,180,0.25)] px-2 py-1 text-[12px] text-[#3a414a]">
-          <div className="flex flex-wrap gap-5">
+        <div className="flex items-center justify-between border-b border-[#d7dce2] bg-[rgba(154,167,180,0.25)] px-[8px] py-[4px] text-[12px] text-[#3a414a]">
+          <div className="flex flex-wrap gap-[16px]">
             <span>Lorem Ipsum</span>
             <span>Lorem Ipsum</span>
             <span>Lorem Ipsum</span>
@@ -137,8 +137,8 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
           <span className="text-[11px]">v</span>
         </div>
 
-        <div className="grid gap-6 px-3 py-4 xl:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="space-y-3">
+        <div className="grid gap-[18px] px-[10px] py-[10px] xl:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="space-y-[8px]">
             <ClassicField label="Warengruppe:" subtle value="3 freigegeben" />
             <ClassicField label="Konfigurator:" value={formatRemainingTime(state.remainingMs)} />
             <ClassicField label="Konfigurationsart:" value={modeLabel(state.mode)} />
@@ -149,7 +149,7 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
             <ClassicField label="Alternativ-Artikel:" value={schedule.workDays.map(weekdayLabel).join(", ")} />
           </div>
 
-          <div className="grid content-start gap-3 text-[12px] text-[#3a414a]">
+          <div className="grid content-start gap-[9px] text-[12px] text-[#3a414a]">
             {checkboxRows.map(({ label, checked }) => (
               <div className="flex items-center justify-between gap-4" key={label}>
                 <span>{label}</span>
@@ -164,7 +164,7 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
               </div>
             ))}
 
-            <div className="pt-3">
+            <div className="pt-[6px]">
               <Link
                 className="inline-flex h-[28px] items-center rounded-[4px] border border-[#8a96a3] bg-white px-3 text-[12px] font-medium text-[#3a414a] hover:bg-[#f4f7fb]"
                 href="/settings"
@@ -180,7 +180,7 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
         <div className="overflow-hidden rounded-[4px] border border-[#d7dce2]">
           <div className="grid grid-cols-[84px_minmax(240px,2fr)_140px_170px_170px_170px_170px_62px_52px] bg-[rgba(154,167,180,0.4)] text-[12px] font-medium text-[#3a414a]">
             {["ID", "Document Name", "Document Type", "Lorum Ipsum", "Lorum Ipsum", "Lorum Ipsum", "Lorum Ipsum", "Lorum...", "Che..."].map((header) => (
-              <div className="border-r border-white px-2 py-[6px]" key={header}>
+              <div className="border-r border-white px-[8px] py-[6px]" key={header}>
                 {header}
               </div>
             ))}
@@ -190,24 +190,24 @@ export function CountdownCard({ state, schedule, now }: CountdownCardProps) {
             <div
               className={[
                 "grid grid-cols-[84px_minmax(240px,2fr)_140px_170px_170px_170px_170px_62px_52px] text-[12px] text-[#3a414a]",
-                index % 2 === 1 ? "bg-[rgba(154,167,180,0.32)]" : "bg-white"
+                index % 2 === 1 ? "bg-[rgba(154,167,180,0.34)]" : "bg-white"
               ].join(" ")}
               key={row.id}
             >
-              <div className="border-r border-[#8a96a3] px-2 py-[5px]">{row.id}</div>
-              <div className="border-r border-[#8a96a3] px-2 py-[5px]">{row.name}</div>
-              <div className="border-r border-[#8a96a3] px-2 py-[5px]">{row.type}</div>
-              <div className="border-r border-[#8a96a3] px-2 py-[5px]">{row.value}</div>
-              <div className="border-r border-[#8a96a3] px-2 py-[5px]">{row.meta}</div>
-              <div className="border-r border-[#8a96a3] px-2 py-[5px]">{schedule.startTime}</div>
-              <div className="border-r border-[#8a96a3] px-2 py-[5px]">{schedule.endTime}</div>
-              <div className="border-r border-[#8a96a3] px-2 py-[5px] text-center">&gt;</div>
-              <div className="px-2 py-[5px] text-center">o</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{row.id}</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{row.name}</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{row.type}</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{row.value}</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{row.meta}</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{schedule.startTime}</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px]">{schedule.endTime}</div>
+              <div className="border-r border-[#8a96a3] px-[8px] py-[5px] text-center">&gt;</div>
+              <div className="px-[8px] py-[5px] text-center">o</div>
             </div>
           ))}
         </div>
 
-        <div className="mt-4 flex justify-end gap-6 text-[12px] text-[#3a414a]">
+        <div className="mt-[14px] flex justify-end gap-[18px] text-[12px] text-[#3a414a]">
           <div className="flex items-center gap-2">
             <span>Rabat:</span>
             <span className="h-[22px] w-[170px] rounded-[4px] border border-[#8a96a3] bg-white" />
